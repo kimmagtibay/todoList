@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description')->nullable()->default(null);
-            $table->enum('status', ['pending', 'in_progress', 'completed'])->default('pending');
+            $table->sting('title');
+            $table->text('description');
+            $table->boolean('completed')->default(false);
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('todo');
+        Schema::dropIfExists('todos');
     }
 };
